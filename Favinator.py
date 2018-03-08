@@ -9,10 +9,15 @@ class ImageWithFit:
         self.thumbName = thumbName
         self.extension = extension
 
+    def imageIsSquare(self):
+        answer = True
+        if self.originalImage.width != self.originalImage.height:
+            answer = False
+        return answer
+
     def fitImage(self, size):
         imageTmp = self.originalImage
-        if self.originalImage.width != self.originalImage.height:
-            print("Warning: use square dimension for the best performance")
+        if self.imageIsSquare:
             cropSize = self.originalImage.width
             if self.originalImage.width > self.originalImage.height:
                 cropSize = self.originalImage.height
@@ -33,7 +38,7 @@ class ImageWithFit:
         oldHeightTmp = self.originalImage.height
         changeXPosition = 0
         changeYPosition = 0
-        print(oldWidthTmp)
+
         if (oldWidthTmp - newWidth) % 2 != 0 and oldWidthTmp != newWidth:
             oldWidthTmp += 1
             changeXPosition = 1
@@ -95,10 +100,16 @@ class Favinator:
             <meta name="theme-color" content="#ffffff">
         """.format(ext = extension)
 
+
+
     def run(self):
+        if self.imaginator.imageIsSquare() == False:
+            print("Warning: use square dimension for the best performance")
+
         htmlFile = open("fav.html", "w")
         htmlFile.write(self.html)
         htmlFile.close()
+        
         for s in self.sizes:
             self.imaginator.thumbName = "ico-" + str(s[0]) + "." + self.extension
             self.imaginator.fitImage(s)
