@@ -23,19 +23,25 @@ class ImageWithFit:
     def cropFromCenter(self, size):
         newWidth = size[0]
         newHeight = size[0]
+
+
         if len(size) > 1:
             newHeight = size[1]
+
 
         oldWidthTmp = self.originalImage.width
         oldHeightTmp = self.originalImage.height
         changeXPosition = 0
         changeYPosition = 0
-        if oldWidthTmp % 2 != 0 and newWidth % 2 == 0 and oldWidthTmp != newWidth:
+        print(oldWidthTmp)
+        if (oldWidthTmp - newWidth) % 2 != 0 and oldWidthTmp != newWidth:
             oldWidthTmp += 1
             changeXPosition = 1
-        if oldHeightTmp % 2 != 0 and newHeight % 2 == 0 and oldHeightTmp != newHeight:
+        if (oldHeightTmp - newHeight) % 2 != 0 and oldHeightTmp != newHeight:
             oldHeightTmp += 1
             changeYPosition = 1
+        
+        
 
         left = ((oldWidthTmp - newWidth)/2) - changeXPosition
         top = ((oldHeightTmp - newHeight)/2) - changeYPosition
@@ -99,11 +105,6 @@ class Favinator:
 
 
         
-
-        
-
-
-
 
 
 if __name__ == "__main__":
