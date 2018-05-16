@@ -17,11 +17,12 @@ class ImageWithFit:
 
     def fitImage(self, size):
         imageTmp = self.originalImage
-        if self.imageIsSquare:
+        if self.imageIsSquare == False:
             cropSize = self.originalImage.width
             if self.originalImage.width > self.originalImage.height:
                 cropSize = self.originalImage.height
                 imageTmp = self.cropFromCenter([cropSize])
+        print(size)
         imageTmp.thumbnail(size)
         imageTmp.save(self.thumbName, self.extension)
             
@@ -60,19 +61,21 @@ class ImageWithFit:
 class Favinator:
 
     sizes = (
-        (16, 16),
-        (32, 32),
-        (57, 57),
-        (60, 60),
-        (72, 72),
-        (76, 76),
-        (96, 96),
-        (114, 114),
-        (120, 120),
-        (144, 144),
-        (152, 152),
+        (192, 192),
         (180, 180),
-        (192, 192)
+        (152, 152),
+        (144, 144),
+        (120, 120),
+        (114, 114),
+        (96, 96),
+        (76, 76),
+        (72, 72),
+        (60, 60),
+        (57, 57),
+        (32, 32),
+        (16, 16)
+   
+
     )
 
     def __init__(self, path, extension = "png"):
